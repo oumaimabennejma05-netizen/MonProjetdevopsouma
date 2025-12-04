@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateur d'Âge DevOps</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 600;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .date-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .devops-info {
+            margin-top: 30px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .devops-info h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .devops-info p {
+            color: #666;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #888;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="logo">🎂</div>
+    <h1>Calculateur d'Âge DevOps</h1>
+
+    <form action="calculate-age" method="post">
+        <div class="form-group">
+            <label for="name">Nom (optionnel):</label>
+            <input type="text" id="name" name="name" placeholder="Votre nom">
+        </div>
+
+        <div class="form-group">
+            <label for="birthDate">Date de naissance:</label>
+            <div class="date-inputs">
+                <div>
+                    <label for="birthDay">Jour</label>
+                    <input type="number" id="birthDay" name="birthDay"
+                           min="1" max="31" placeholder="JJ" required>
+                </div>
+                <div>
+                    <label for="birthMonth">Mois</label>
+                    <input type="number" id="birthMonth" name="birthMonth"
+                           min="1" max="12" placeholder="MM" required>
+                </div>
+                <div>
+                    <label for="birthYear">Année</label>
+                    <input type="number" id="birthYear" name="birthYear"
+                           min="1900" max="2024" placeholder="AAAA" required>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn">Calculer mon âge 🚀</button>
+    </form>
+
+    <div class="devops-info">
+        <h3>📦 Info DevOps</h3>
+        <p><strong>Projet:</strong> Application Java Web</p>
+        <p><strong>Serveur:</strong> Apache Tomcat</p>
+        <p><strong>Build:</strong> Maven</p>
+        <p><strong>CI/CD:</strong> Pipeline automatique</p>
+    </div>
+
+    <footer>
+        <p>Projet DevOps - Calculatrice d'âge simple</p>
+    </footer>
+</div>
+
+<script>
+    // Validation côté client
+    document.querySelector('form').addEventListener('submit', function(e) {
+        const day = parseInt(document.getElementById('birthDay').value);
+        const month = parseInt(document.getElementById('birthMonth').value);
+        const year = parseInt(document.getElementById('birthYear').value);
+
+        if (year < 1900 || year > new Date().getFullYear()) {
+            alert("Veuillez entrer une année valide (1900-" + new Date().getFullYear() + ")");
+            e.preventDefault();
+            return;
+        }
+
+        // Validation basique des jours par mois
+        const daysInMonth = new Date(year, month, 0).getDate();
+        if (day < 1 || day > daysInMonth) {
+            alert("Jour invalide pour ce mois et cette année!");
+            e.preventDefault();
+        }
+    });
+</script>
+</body>
+</html>
